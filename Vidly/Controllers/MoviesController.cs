@@ -14,10 +14,10 @@ namespace Vidly.Controllers
         public ActionResult Random()
         {
             var movie = new Movie() { Name = "Shrek!" };
-            var customers = new List<Customers>
+            var customers = new List<Customer>
             {
-                new Customers {Name="Customer 1"},
-                new Customers {Name="Customer 2"}
+                new Customer {Name="Customer 1"},
+                new Customer {Name="Customer 2"}
             };
 
             //string je pevny, lepsie ViewBag
@@ -52,6 +52,7 @@ namespace Vidly.Controllers
             return Content("id=" + id);
         }
 
+        /*
         public ActionResult Index(int? pageIndex, string sortBy)
         {
             if (!pageIndex.HasValue)
@@ -61,6 +62,18 @@ namespace Vidly.Controllers
                 sortBy = "Name";
 
             return Content(string.Format("pageIndex={0} & sortBy={1}", pageIndex, sortBy));
+        }
+        */
+
+        public ActionResult Index()
+        {
+            List<Movie> movies = new List<Movie>
+            {
+                new Movie{Id=0, Name="Shrek!"},
+                new Movie{Id=1, Name="Wall-e"}
+            };
+
+            return View(movies);
         }
 
         //pre dva roky to nie je tak jednoduche cez regex :)
