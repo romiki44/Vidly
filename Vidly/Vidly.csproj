@@ -226,15 +226,82 @@
     <Compile Include="Migrations\201807301419042_RemoveDupliciteFKIDFromCustomer.Designer.cs">
       <DependentUpon>201807301419042_RemoveDupliciteFKIDFromCustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807301542141_AddMemebershipTypeNameColumn.cs" />
+    <Compile Include="Migrations\201807301542141_AddMemebershipTypeNameColumn.Designer.cs">
+      <DependentUpon>201807301542141_AddMemebershipTypeNameColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807301545176_PopulateMembershipTypeNameColumn.cs" />
+    <Compile Include="Migrations\201807301545176_PopulateMembershipTypeNameColumn.Designer.cs">
+      <DependentUpon>201807301545176_PopulateMembershipTypeNameColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807301559423_AddBirthdayColumneToCustomer.cs" />
+    <Compile Include="Migrations\201807301559423_AddBirthdayColumneToCustomer.Designer.cs">
+      <DependentUpon>201807301559423_AddBirthdayColumneToCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807301602344_AddBirthdayColumneToCustomer1.cs" />
+    <Compile Include="Migrations\201807301602344_AddBirthdayColumneToCustomer1.Designer.cs">
+      <DependentUpon>201807301602344_AddBirthdayColumneToCustomer1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807301704509_AddMoviesTable.cs" />
+    <Compile Include="Migrations\201807301704509_AddMoviesTable.Designer.cs">
+      <DependentUpon>201807301704509_AddMoviesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807301713166_AddGenreTable.cs" />
+    <Compile Include="Migrations\201807301713166_AddGenreTable.Designer.cs">
+      <DependentUpon>201807301713166_AddGenreTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807301720462_AddColumnsToMovieTable.cs" />
+    <Compile Include="Migrations\201807301720462_AddColumnsToMovieTable.Designer.cs">
+      <DependentUpon>201807301720462_AddColumnsToMovieTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807301721514_PopulateGenresTable.cs" />
+    <Compile Include="Migrations\201807301721514_PopulateGenresTable.Designer.cs">
+      <DependentUpon>201807301721514_PopulateGenresTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807301732159_ChangeGenreIDToByte.cs" />
+    <Compile Include="Migrations\201807301732159_ChangeGenreIDToByte.Designer.cs">
+      <DependentUpon>201807301732159_ChangeGenreIDToByte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807301737385_RemoveGenreIDIdentity.cs" />
+    <Compile Include="Migrations\201807301737385_RemoveGenreIDIdentity.Designer.cs">
+      <DependentUpon>201807301737385_RemoveGenreIDIdentity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807301742365_RemoveGenreIDIdentity1.cs" />
+    <Compile Include="Migrations\201807301742365_RemoveGenreIDIdentity1.Designer.cs">
+      <DependentUpon>201807301742365_RemoveGenreIDIdentity1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807301750319_PopulateGenresTable1.cs" />
+    <Compile Include="Migrations\201807301750319_PopulateGenresTable1.Designer.cs">
+      <DependentUpon>201807301750319_PopulateGenresTable1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807311859070_CustomerTableChangemembershipTypeToRequired.cs" />
+    <Compile Include="Migrations\201807311859070_CustomerTableChangemembershipTypeToRequired.Designer.cs">
+      <DependentUpon>201807311859070_CustomerTableChangemembershipTypeToRequired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807311930178_CustomerTableChangemembershipTypeToAllowNull.cs" />
+    <Compile Include="Migrations\201807311930178_CustomerTableChangemembershipTypeToAllowNull.Designer.cs">
+      <DependentUpon>201807311930178_CustomerTableChangemembershipTypeToAllowNull.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807312010016_CustomerTableAddMembershipId.cs" />
+    <Compile Include="Migrations\201807312010016_CustomerTableAddMembershipId.Designer.cs">
+      <DependentUpon>201807312010016_CustomerTableAddMembershipId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807312018494_MovieTableAddGenreID.cs" />
+    <Compile Include="Migrations\201807312018494_MovieTableAddGenreID.Designer.cs">
+      <DependentUpon>201807312018494_MovieTableAddGenreID.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customers.cs" />
+    <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CustomerFormViewModel.cs" />
+    <Compile Include="ViewModels\MovieFormViewModel.cs" />
     <Compile Include="ViewModels\RandomMovieViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -297,11 +364,13 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Movies\Random.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Movies\Index.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Customers\Details.cshtml" />
+    <Content Include="Views\Movies\Details.cshtml" />
+    <Content Include="Views\Customers\CustomerForm.cshtml" />
+    <Content Include="Views\Movies\MovieForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -338,6 +407,54 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807301419042_RemoveDupliciteFKIDFromCustomer.resx">
       <DependentUpon>201807301419042_RemoveDupliciteFKIDFromCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807301542141_AddMemebershipTypeNameColumn.resx">
+      <DependentUpon>201807301542141_AddMemebershipTypeNameColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807301545176_PopulateMembershipTypeNameColumn.resx">
+      <DependentUpon>201807301545176_PopulateMembershipTypeNameColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807301559423_AddBirthdayColumneToCustomer.resx">
+      <DependentUpon>201807301559423_AddBirthdayColumneToCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807301602344_AddBirthdayColumneToCustomer1.resx">
+      <DependentUpon>201807301602344_AddBirthdayColumneToCustomer1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807301704509_AddMoviesTable.resx">
+      <DependentUpon>201807301704509_AddMoviesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807301713166_AddGenreTable.resx">
+      <DependentUpon>201807301713166_AddGenreTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807301720462_AddColumnsToMovieTable.resx">
+      <DependentUpon>201807301720462_AddColumnsToMovieTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807301721514_PopulateGenresTable.resx">
+      <DependentUpon>201807301721514_PopulateGenresTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807301732159_ChangeGenreIDToByte.resx">
+      <DependentUpon>201807301732159_ChangeGenreIDToByte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807301737385_RemoveGenreIDIdentity.resx">
+      <DependentUpon>201807301737385_RemoveGenreIDIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807301742365_RemoveGenreIDIdentity1.resx">
+      <DependentUpon>201807301742365_RemoveGenreIDIdentity1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807301750319_PopulateGenresTable1.resx">
+      <DependentUpon>201807301750319_PopulateGenresTable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807311859070_CustomerTableChangemembershipTypeToRequired.resx">
+      <DependentUpon>201807311859070_CustomerTableChangemembershipTypeToRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807311930178_CustomerTableChangemembershipTypeToAllowNull.resx">
+      <DependentUpon>201807311930178_CustomerTableChangemembershipTypeToAllowNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807312010016_CustomerTableAddMembershipId.resx">
+      <DependentUpon>201807312010016_CustomerTableAddMembershipId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807312018494_MovieTableAddGenreID.resx">
+      <DependentUpon>201807312018494_MovieTableAddGenreID.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -11,3 +11,11 @@
         <tr><td>@Model.Name<td></tr>
     </tbody>
 </table>
+<ul style="font-size:large">
+    <li>Membership Type: @Model.MembershipType.TypeName</li>
+    @if(@Model.Birthdate!=null)
+    {
+        <li>Birthday: @Model.Birthdate.Value.ToShortDateString()</li>
+    }
+        
+</ul>

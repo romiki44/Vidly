@@ -5,83 +5,106 @@ using System.Web;
 using System.Web.Mvc;
 using Vidly.Models;
 using Vidly.ViewModels;
+using System.Data.Entity;
 
 namespace Vidly.Controllers
 {
     public class MoviesController : Controller
     {
-        // GET: Movies
-        public ActionResult Random()
+
+        private ApplicationDbContext _context;
+
+        public MoviesController()
         {
-            var movie = new Movie() { Name = "Shrek!" };
-            var customers = new List<Customer>
-            {
-                new Customer {Name="Customer 1"},
-                new Customer {Name="Customer 2"}
-            };
+            _context = new ApplicationDbContext();
+        }
 
-            //string je pevny, lepsie ViewBag
-            //ViewData["Movie"] = movie;
-            //ViewBag.Movie = movie;
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
 
-
-            var viewModel = new RandomMovieViewModel
-            {
-                Movie=movie,
-                Customers=customers
-            };
-
-            return View(viewModel);
-
-            //vraj najlepsie, ani ViewData, ani ViewBag
-            //return View(movie);
-
-            //takto alebo cez ViewData
-            //return View(movie);
-            
-
-            // rozne typy ActionResult
-            //return Content("Hi everyone!");
-            //return HttpNotFound();
-            //return new EmptyResult();
-            //return RedirectToAction("Index", "Home", new { page = 1, sortBy = "name" });
+        public ActionResult Index()
+        {
+            //var movies = GetMovies();
+            var movies = _context.Movies.Include(m => m.Genre);
+            return View(movies);
         }
 
         public ActionResult Edit(int id)
         {
-            return Content("id=" + id);
+            var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
+
+            if (movie == null)
+                return HttpNotFound();
+
+            var viewModel = new MovieFormViewModel
+            {
+                Movie = movie,
+                Genres = _context.Genres.ToList()
+            };
+
+
+            return View("MovieForm", viewModel);
         }
 
-        /*
-        public ActionResult Index(int? pageIndex, string sortBy)
+        public ActionResult New()
         {
-            if (!pageIndex.HasValue)
-                pageIndex = 1;
 
-            if (string.IsNullOrEmpty(sortBy))
-                sortBy = "Name";
+            var genres = _context.Genres.ToList();
+            var viewModel = new MovieFormViewModel
+            {
+                Genres = genres
+            };
 
-            return Content(string.Format("pageIndex={0} & sortBy={1}", pageIndex, sortBy));
+            return View("MovieForm", viewModel);
         }
-        */
 
-        public ActionResult Index()
+
+        [HttpPost]
+        public ActionResult Save(Movie movie)
         {
-            List<Movie> movies = new List<Movie>
+            if (movie.Id == 0)
+                _context.Movies.Add(movie);
+            else
+            {
+                var movieExist = _context.Movies.Single(m => m.Id == movie.Id);
+
+                movieExist.Name = movie.Name;
+                movieExist.ReleaseDate = movie.ReleaseDate;
+                movieExist.DateAdded = movie.DateAdded;
+                movieExist.GenreID = movie.GenreID;
+                movieExist.NumberInStock = movie.NumberInStock;
+
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Movies");
+        }
+
+        public ActionResult Details(int id)
+        {
+
+            //var movies = GetCustomers();
+            var movies = _context.Movies.Include(m => m.Genre);
+            var movie = movies.SingleOrDefault(m => m.Id == id);
+
+            if (movie == null)
+                return HttpNotFound();
+            else
+                return View(movie);
+        }
+
+        private IEnumerable<Movie> GetMovies()
+        {
+            return new List<Movie>
             {
                 new Movie{Id=0, Name="Shrek!"},
                 new Movie{Id=1, Name="Wall-e"}
             };
 
-            return View(movies);
-        }
 
-        //pre dva roky to nie je tak jednoduche cez regex :)
-        //[Route("movies/released/{year:regex(2015|2106)}/{month:regex(\\{d2})}")]
-        [Route("movies/released/{year}/{month:regex(\\d{2})}")]
-        public ActionResult ByReleaseDate(int year, int month)
-        {
-            return Content(year + "/" + month);
         }
     }
 }
