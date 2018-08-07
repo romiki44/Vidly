@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -23,7 +24,10 @@ namespace Vidly.Controllers.Api
         //GET /api/customers
         public IEnumerable<CustomerDto> GetCustomers()
         {
-            return _context.Customers.ToList().Select(Mapper.Map<Customer, CustomerDto>);
+            return _context.Customers
+                .Include(c=>c.MembershipType)
+                .ToList()
+                .Select(Mapper.Map<Customer, CustomerDto>);
 
         }
 
@@ -60,7 +64,7 @@ namespace Vidly.Controllers.Api
 
         //PUT /api/customer/1
         [HttpPut]
-        public void UpdateCustomer(int id, CustomerDto customerDto)
+        public IHttpActionResult UpdateCustomer(int id, CustomerDto customerDto)
         {
             if (!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
@@ -68,7 +72,7 @@ namespace Vidly.Controllers.Api
             var customerToEdit = _context.Customers.SingleOrDefault(c => c.Id == id);
 
             if (customerToEdit == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return BadRequest();
 
 
             Mapper.Map(customerDto, customerToEdit);
@@ -81,18 +85,21 @@ namespace Vidly.Controllers.Api
             */
             _context.SaveChanges();
 
+            return Ok();
         }
 
         [HttpDelete]
-        public void DeleteCustomer(int id)
+        public IHttpActionResult DeleteCustomer(int id)
         {
             var customerToDelete = _context.Customers.SingleOrDefault(c => c.Id == id);
 
             if (customerToDelete == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                NotFound();
 
             _context.Customers.Remove(customerToDelete);
             _context.SaveChanges();
+
+            return Ok();
         }
 
 
