@@ -23,6 +23,7 @@ namespace Vidly.Controllers
             _context.Dispose();
         }
 
+        [Authorize(Roles = RoleNames.CanManageMovies)]
         public ActionResult New()
         {
             var membershipTypes = _context.MembershipTypes.ToList();
@@ -97,7 +98,10 @@ namespace Vidly.Controllers
             return View(customers);
             */
 
-            return View();
+            if (User.IsInRole(RoleNames.CanManageMovies))
+                return View("Index");
+
+            return View("IndexReadOnly");
         }
 
         public ActionResult Details(int id)
