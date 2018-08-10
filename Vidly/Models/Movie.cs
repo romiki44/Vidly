@@ -32,6 +32,10 @@ namespace Vidly.Models
         [Display(Name = "Number in Stock")]
         public int NumberInStock { get; set; }
 
+        [Required]
+        [Display(Name="Number of available movies")]
+        public int NumberAvailable { get; set; }
+
         public Movie()
         {
             DateAdded = DateTime.Now;
